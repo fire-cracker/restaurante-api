@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize'
 
-import { DbInterface } from '../../types/databaseTypes'
+import { DbInterface } from '../../types/database'
 import { UserModel } from './users'
 
 const env = process.env.NODE_ENV || 'development'

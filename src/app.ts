@@ -4,8 +4,9 @@ import { createLogger, format, transports } from 'winston'
 import morgan from 'morgan'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import { Server } from 'typescript-rest'
 
-import router from './routes'
+import router from './api/routes'
 
 dotenv.config()
 
@@ -15,7 +16,7 @@ const logger = createLogger({
   transports: [new transports.Console()]
 })
 
-const app = express()
+const app: express.Application = express()
 const corsOptions = {
   credentials: true,
   origin: [],
@@ -23,10 +24,15 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 app.use(morgan('dev'))
-app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
 // routes
+Server.swagger(app, {
+  endpoint: 'api-docs',
+  filePath: './api.docs/swagger.json',
+  schemes: ['http']
+})
 app.use(router)
 
 app.get('*', (req: Request, res: Response) =>

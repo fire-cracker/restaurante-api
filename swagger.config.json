@@ -1,0 +1,28 @@
+{
+  "swagger": {
+      "outputDirectory": "./api.docs",
+      "entryFile": "./src/app.ts",
+      "name": "Restaurante",
+      "description": "Restaurante API Docs",
+      "basePath": "/",
+      "securityDefinitions": {
+          "Bearer": {
+              "description": "JWT Auth",
+              "type": "apiKey",
+              "name": "Authorization",
+              "in": "header",
+              "bearerFormat": "JWT"
+          },
+          "apiKey": {
+              "type": "apiKey",
+              "name": "access_token",
+              "in": "query"
+          }
+      },
+      "license": "UNLICENSED",
+      "produces": [
+          "application/json"
+      ],
+      "version": "0.0.1"
+  }
+}

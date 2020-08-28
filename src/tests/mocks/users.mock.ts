@@ -1,1 +1,1 @@
-export const userDetails = ['id', 'firstname', 'lastname', 'email', 'password', 'role', 'createdAt', 'updatedAt']
+export const userDetails = ['id', 'email', 'password', 'role', 'createdAt', 'updatedAt']

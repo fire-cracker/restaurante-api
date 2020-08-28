@@ -11,20 +11,6 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.literal('uuid_generate_v4()')
       },
-      firstname: {
-        allowNull: {
-          args: false,
-          msg: 'Please enter a username'
-        },
-        type: Sequelize.STRING
-      },
-      lastname: {
-        allowNull: {
-          args: false,
-          msg: 'Please enter a username'
-        },
-        type: Sequelize.STRING
-      },
       username: {
         allowNull: {
           args: false,

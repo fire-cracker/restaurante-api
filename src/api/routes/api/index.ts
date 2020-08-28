@@ -6,6 +6,6 @@ import usersRouter from './users.router'
 const routes = Router()
 
 routes.use('/', welcomeRoute)
-routes.use('/users', usersRouter)
+routes.use('/', usersRouter)
 
 export default routes

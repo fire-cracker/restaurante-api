@@ -1,9 +1,8 @@
-import { Response, Request, RequestHandler } from 'express'
+import { Response, Request } from 'express'
 import { Tags } from 'typescript-rest-swagger'
 
 import { createUser, getUser } from '../services/users.service'
 import { signToken, validatePassword } from '../../utils'
-import { UserInterface } from '../../types/user'
 
 /**
  * @export
@@ -12,7 +11,7 @@ import { UserInterface } from '../../types/user'
  * @param {Object} res - response object
  * @returns {Object} JSON object (JSend format)
  */
-export const userSignup = async (req: Request, res: Response) => {
+export const userSignup = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
     const {
       body: { username, email, password }
@@ -54,7 +53,7 @@ export const userSignup = async (req: Request, res: Response) => {
  * @param {Object} res - response object
  * @returns {Object} JSON object (JSend format)
  */
-export const userLogin = async (req: Request, res: Response) => {
+export const userLogin = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
     const {
       body: { email, password }

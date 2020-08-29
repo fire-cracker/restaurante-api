@@ -12,10 +12,7 @@ module.exports = {
         defaultValue: Sequelize.literal('uuid_generate_v4()')
       },
       username: {
-        allowNull: {
-          args: false,
-          msg: 'Please enter a username'
-        },
+        allowNull: false,
         type: Sequelize.STRING,
         unique: {
           args: true,
@@ -31,18 +28,12 @@ module.exports = {
         }
       },
       password: {
-        allowNull: {
-          args: false,
-          msg: 'Please enter a password'
-        },
-        type: Sequelize.STRING,
-        validate: {
-          len: [8, 72]
-        }
+        allowNull: false,
+        type: Sequelize.STRING
       },
       role: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.ENUM('customer', 'admin'),
         defaultValue: 'customer'
       },
       createdAt: {
@@ -55,7 +46,8 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
       }
-    })},
+    })
+  },
   //@ts-ignore
-  down: queryInterface => queryInterface.dropTable('user')
+  down: queryInterface => queryInterface.dropTable('users')
 }

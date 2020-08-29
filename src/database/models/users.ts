@@ -8,7 +8,7 @@ export interface UserAttributes {
   username: string
   email: string
   password?: string
-  role?: string
+  role?: 'customer' | 'admin'
   createdAt?: Date
   updatedAt?: Date
 }
@@ -34,7 +34,7 @@ export const UserModel = (
     },
     role: {
       allowNull: false,
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('customer', 'admin'),
       defaultValue: 'customer'
     }
   }
@@ -45,7 +45,6 @@ export const UserModel = (
     const salt = await bcrypt.genSaltSync()
     user.password = await bcrypt.hashSync(user.password, salt)
   })
-
 
   User.associate = models => {
     // User.hasMany(models.Comment, { foreignKey: 'AuthorId', as: 'comments' })

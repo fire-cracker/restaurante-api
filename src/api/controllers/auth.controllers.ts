@@ -31,9 +31,9 @@ export const userSignup = async (req: Request, res: Response): Promise<Response<
       role: 'user',
       email
     })
-    delete user.password
-    // delete (user as AnOptionalNumber).password
+
     return res.status(200).send({
+      status: 'success',
       data: {
         user,
         token: `Bearer ${userToken}`
@@ -67,19 +67,20 @@ export const userLogin = async (req: Request, res: Response): Promise<Response<a
       })
     }
 
-    if (validatePassword(user.password!, password) === false) {
-      return res.status(404).send({
-        status: 'fail',
-        data: { message: 'Provide correct login credentials' }
-      })
-    }
+    // if (user.validatePassword(password) === false) {
+    //   return res.status(404).send({
+    //     status: 'fail',
+    //     data: { message: 'Provide correct login credentials' }
+    //   })
+    // }
 
     const userToken = signToken({
       role: 'user',
       email
     })
-    delete user.password
+
     return res.status(200).send({
+      status: 'success',
       data: {
         user,
         token: `Bearer ${userToken}`
@@ -87,7 +88,7 @@ export const userLogin = async (req: Request, res: Response): Promise<Response<a
     })
   } catch (error) {
     return res.status(502).send({
-      message: 'An error occurred'
+      message: 'Server error'
     })
   }
 }

@@ -3,12 +3,12 @@ import { fetchAllMenus, fetchMenu } from '../services/menus.service'
 
 /**
  * @export
- * @function getAllQuestions
+ * @function getAllMenus
  * @param {Object} req - request received
  * @param {Object} res - response object
  * @returns {Object} JSON object (JSend format)
  */
-export const getAllQuestions = async (reg: Request, res: Response): Promise<Response<any>> => {
+export const getAllMenus = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
     const { rows: menus, count } = await fetchAllMenus()
     return res.status(200).send({
@@ -34,6 +34,7 @@ export const getAllQuestions = async (reg: Request, res: Response): Promise<Resp
  */
 export const getMenu = async ({ params: { id } }: Request, res: Response): Promise<Response<any>> => {
   try {
+    // const { context, name } = req.query as { [key: string]: string}
     const menu = await fetchMenu(Number(id))
 
     if (!menu) {

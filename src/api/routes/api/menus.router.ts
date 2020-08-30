@@ -1,11 +1,10 @@
 import express from 'express'
 
-import { getAllQuestions, getMenu } from '../../controllers/menu.controllers'
-import { createUserValidator, userLoginValidator } from '../../middlewares/validation/users.validation'
+import { getAllMenus, getMenu } from '../../controllers/menu.controllers'
 
 const menusRouter = express.Router()
 
-menusRouter.get('/', getAllQuestions)
+menusRouter.get('/', getAllMenus)
 menusRouter.get('/:id', getMenu)
 
 export default menusRouter

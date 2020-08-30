@@ -1,9 +1,8 @@
-import { Response, Request, RequestHandler } from 'express'
+import { Response, Request } from 'express'
 import { Tags } from 'typescript-rest-swagger'
 
 import { createUser, getUser } from '../services/users.service'
 import { signToken, validatePassword } from '../../utils'
-import { UserInterface } from '../../types/user'
 
 /**
  * @export
@@ -12,7 +11,7 @@ import { UserInterface } from '../../types/user'
  * @param {Object} res - response object
  * @returns {Object} JSON object (JSend format)
  */
-export const userSignup = async (req: Request, res: Response) => {
+export const userSignup = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
     const {
       body: { username, email, password }
@@ -32,9 +31,9 @@ export const userSignup = async (req: Request, res: Response) => {
       role: 'user',
       email
     })
-    delete user.password
-    // delete (user as AnOptionalNumber).password
+
     return res.status(200).send({
+      status: 'success',
       data: {
         user,
         token: `Bearer ${userToken}`
@@ -54,7 +53,7 @@ export const userSignup = async (req: Request, res: Response) => {
  * @param {Object} res - response object
  * @returns {Object} JSON object (JSend format)
  */
-export const userLogin = async (req: Request, res: Response) => {
+export const userLogin = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
     const {
       body: { email, password }
@@ -68,19 +67,20 @@ export const userLogin = async (req: Request, res: Response) => {
       })
     }
 
-    if (validatePassword(user.password!, password) === false) {
-      return res.status(404).send({
-        status: 'fail',
-        data: { message: 'Provide correct login credentials' }
-      })
-    }
+    // if (user.validatePassword(password) === false) {
+    //   return res.status(404).send({
+    //     status: 'fail',
+    //     data: { message: 'Provide correct login credentials' }
+    //   })
+    // }
 
     const userToken = signToken({
       role: 'user',
       email
     })
-    delete user.password
+
     return res.status(200).send({
+      status: 'success',
       data: {
         user,
         token: `Bearer ${userToken}`
@@ -88,7 +88,7 @@ export const userLogin = async (req: Request, res: Response) => {
     })
   } catch (error) {
     return res.status(502).send({
-      message: 'An error occurred'
+      message: 'Server error'
     })
   }
 }

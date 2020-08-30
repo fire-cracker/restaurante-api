@@ -9,7 +9,7 @@ module.exports = {
       [
         {
           username: 'johndoe',
-          email: 'johndoe@example.test',
+          email: 'johndoe@example.com',
           password: bcrypt.hashSync('password', bcrypt.genSaltSync(10)),
           role: 'admin',
           createdAt: new Date(),
@@ -17,7 +17,7 @@ module.exports = {
         },
         {
           username: 'johnjames',
-          email: 'johnjames@example.test',
+          email: 'johnjames@example.com',
           password: bcrypt.hashSync('password', bcrypt.genSaltSync(10)),
           role: 'customer',
           createdAt: new Date(),
@@ -25,7 +25,7 @@ module.exports = {
         },
         {
           username: 'janethjack',
-          email: 'janethjack@example.test',
+          email: 'janethjack@example.com',
           password: bcrypt.hashSync('password', bcrypt.genSaltSync(10)),
           role: 'customer',
           createdAt: new Date(),

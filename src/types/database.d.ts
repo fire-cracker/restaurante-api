@@ -13,4 +13,5 @@ export interface DbInterface {
   sequelize: Sequelize.Sequelize
   Sequelize: Sequelize.SequelizeStatic
   User: Sequelize.Model<UserInstance, UserAttributes>
+  Menu: Sequelize.Model<MenuInstance, MenuAttributes>
 }

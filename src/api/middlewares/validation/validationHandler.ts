@@ -33,7 +33,7 @@ export const validationHandler = async (req: Request, res: Response, next: NextF
  * @param {Object} next - next object
  * @returns {Object} next object
  */
-export const authInterceptor = async (req: any, res: Response, next: NextFunction,) => {
+export const authInterceptor = async (req: any, res: Response, next: NextFunction) => {
   const { user } = req
   if (user.error) {
     return res.status(401).send(user.error)

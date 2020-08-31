@@ -45,7 +45,7 @@ export const MenuModel = (
   const Menu = sequelize.define<MenuInstance, MenuAttributes>('menu', attributes)
 
   Menu.associate = models => {
-    Menu.belongsToMany(models.Orders, {
+    Menu.belongsToMany(models.Order, {
       foreignKey: 'menuId',
       otherKey: 'reservationId',
       through: 'orders',

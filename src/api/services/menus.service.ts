@@ -17,7 +17,7 @@ export const fetchAllMenus = (): Promise<{ rows: MenuInstance[]; count: number }
  * @param {Integer} menuId - menu id
  * @returns {Object} object
  */
-export const fetchMenu = (menuId: number): Promise<MenuInstance> => {
-  const menu = db.Menu.findByPk(menuId)
+export const fetchMenu = (id: number): Promise<MenuInstance> => {
+  const menu = db.Menu.findByPk(id)
   return menu
 }

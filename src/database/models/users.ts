@@ -64,7 +64,6 @@ export const UserModel = (
 
   User.prototype.validatePassword = async function (this: UserInstance, newPassword) {
     await this.reload({ attributes: { include: [] } })
-    console.log(newPassword, this.password)
     return bcrypt.compareSync(newPassword, this.password)
   }
 

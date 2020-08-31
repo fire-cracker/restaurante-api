@@ -1,6 +1,8 @@
 import * as Sequelize from 'sequelize'
 
 import { SequelizeAttributes } from '../../types/database'
+import { OrderInstance, OrderAttributes } from './orders'
+import { MenuInstance, MenuAttributes } from './menus'
 
 export interface ReservationAttributes {
   id?: number
@@ -12,7 +14,12 @@ export interface ReservationAttributes {
   updatedAt?: Date
 }
 
-export interface ReservationInstance extends Sequelize.Instance<ReservationAttributes>, ReservationAttributes {}
+export interface ReservationInstance extends Sequelize.Instance<ReservationAttributes>, ReservationAttributes {
+  createReservationMenu: Sequelize.BelongsToManyCreateAssociationMixin<MenuAttributes, MenuInstance['id'], 'orders'>
+  addReservationMenus: Sequelize.BelongsToManyAddAssociationsMixin<MenuAttributes, MenuInstance['id'], 'orders'>
+  addReservationMenu: Sequelize.BelongsToManyAddAssociationMixin<MenuAttributes, MenuInstance['id'], 'orders'>
+  setReservationMenus: Sequelize.BelongsToManySetAssociationsMixin<MenuAttributes, MenuInstance['id'], 'orders'>
+}
 
 export const ReservationModel = (
   sequelize: Sequelize.Sequelize,
@@ -46,7 +53,7 @@ export const ReservationModel = (
       otherKey: 'menuId',
       through: 'orders',
       timestamps: false,
-      as: 'menus'
+      as: 'reservationMenus'
     })
   }
 

@@ -1,5 +1,8 @@
 import { Response, Request } from 'express'
 import { addReservation, fetchAllReservations, fetchReservation } from '../services/reservations.service'
+import { fetchMenu } from '../services/menus.service'
+import { UserInterface, NewReservationInterface, IReservation } from '../../types/user'
+import { ReservationInstance } from '../../database/models/reservations'
 
 /**
  * @export
@@ -10,19 +13,29 @@ import { addReservation, fetchAllReservations, fetchReservation } from '../servi
  */
 export const createReservation = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
-    console.log('req>>>>>', req.body)
     const {
-      body: { date, order, price, persons },
-      // user: { id }
-    } = req
+      body: { date, orders, price, persons },
+      user: { id }
+    } = (req as unknown) as { body: NewReservationInterface; user: UserInterface }
 
-    // const question = await addReservation(id, date, price, persons)
+    const newReservation = (await addReservation(id, date, price, persons)) as ReservationInstance
+    orders.forEach(async (order: any) => {
+      const menu = await fetchMenu(order.menuId)
+      const menuId = order.menuId
+      const quantity: number = order.quantity
+      console.log('order>>>>>', newReservation.id, menuId, quantity)
+
+      if (menu) await newReservation.addReservationMenu(menuId, { through: { quantity } })
+    })
+
     return res.status(200).send({
+      status: 'success',
       data: {
-        // question
+        newReservation
       }
     })
   } catch (error) {
+    console.log('error>>>>>', error)
     return res.status(502).send({
       message: 'An error occurred'
     })

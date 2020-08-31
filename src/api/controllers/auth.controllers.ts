@@ -2,7 +2,7 @@ import { Response, Request } from 'express'
 import { Tags } from 'typescript-rest-swagger'
 
 import { createUser, getUser } from '../services/users.service'
-import { signToken, validatePassword } from '../../utils'
+import { signToken } from '../../utils'
 
 /**
  * @export

@@ -18,5 +18,3 @@ export const signToken = (payload: { role: string; email: string }): string => j
  * @returns {object} Payload
  */
 export const verifyToken = (token: string) => jwt.verify(token, secret)
-
-export const validatePassword = (encodedPassword: string, password: string) => bcrypt.compareSync(password, encodedPassword)

@@ -33,14 +33,7 @@ export const OrderModel = (
 
   const Order = sequelize.define<OrderInstance, OrderAttributes>('order', attributes)
 
-  Order.associate = models => {
-    // Order.hasMany(models.Comment, { foreignKey: 'AuthorId', as: 'comments' })
-    // Order.hasMany(models.Post, { foreignKey: 'AuthorId', as: 'posts' })
-    // Order.belongsToMany(models.Comment, {
-    //   through: 'PostUpvotes',
-    //   as: 'upvotedComments'
-    // })
-  }
+  Order.associate = models => {}
 
   return Order
 }

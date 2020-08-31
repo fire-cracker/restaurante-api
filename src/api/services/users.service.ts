@@ -23,8 +23,8 @@ export const getUsers = async (): Promise<UserInstance[]> => {
  * @param {String} password - customer password
  * @returns {Object} object
  */
-export const createUser = (username: string, email: string, password: string): Promise<UserInstance> =>
-  db.User.create({ username, email, password })
+export const createUser = (username: string, email: string, password: string, role?: 'customer'): Promise<UserInstance> =>
+  db.User.create({ username, email, password, role })
 
 /**
  * @export

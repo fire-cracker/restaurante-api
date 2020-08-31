@@ -63,12 +63,7 @@ export const UserModel = (
   })
 
   User.associate = models => {
-    // User.hasMany(models.Comment, { foreignKey: 'AuthorId', as: 'comments' })
-    // User.hasMany(models.Post, { foreignKey: 'AuthorId', as: 'posts' })
-    // User.belongsToMany(models.Comment, {
-    //   through: 'PostUpvotes',
-    //   as: 'upvotedComments'
-    // })
+    User.hasMany(models.Reservation, { foreignKey: 'userId', as: 'userReservations' })
   }
 
   User.prototype.validatePassword = function (newPassword) {

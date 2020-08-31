@@ -30,6 +30,14 @@ module.exports = {
           role: 'customer',
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          username: 'janedoe',
+          email: 'janedoe@example.com',
+          password: bcrypt.hashSync('password', bcrypt.genSaltSync(10)),
+          role: 'customer',
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

@@ -20,8 +20,7 @@
     "migrate:seed": "yarn undo:migration && yarn migrate && yarn seed",
     "docker:build": "docker build -t express-sequelize-typescript-boilerplate .",
     "docker:run": "docker run --rm -it -p 8080:8080 express-sequelize-typescript-boilerplate",
-    "swagger": "swaggerGen -c swagger.config.json",
-    "heroku-postbuild": "npm run build"
+    "swagger": "swaggerGen -c swagger.config.json"
   },
   "dependencies": {
     "@hapi/joi": "15.1.0",

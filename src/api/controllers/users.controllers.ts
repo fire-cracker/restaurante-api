@@ -1,6 +1,7 @@
 import { Response, Request } from 'express'
 
 import { fetchUserReservation } from '../services/reservations.service'
+import { UserInterface } from '../../types/user'
 
 /**
  * @export
@@ -10,15 +11,25 @@ import { fetchUserReservation } from '../services/reservations.service'
  * @returns {Object} JSON object (JSend format)
  */
 export const getUserReservations = async (req: Request, res: Response): Promise<Response<any>> => {
-  const {
-    query: { date },
-    params: { id }
-  } = (req as unknown) as { query: any; params: { id: number } }
   try {
-    const data = date ? { userId: id, date } : { userId: id }
+    const {
+      query: { date },
+      params: { id: userId },
+      user: { id, role }
+    } = (req as unknown) as { query: any; params: { id: string }; user: UserInterface }
+
+    if (userId !== id && role !== 'admin') {
+      return res.status(401).send({
+        status: 'fail',
+        data: {
+          message: 'Unauthorised to make this request'
+        }
+      })
+    }
+    const data = date ? { userId: role === 'admin' ? userId : id, date } : { userId: role === 'admin' ? userId : id }
     const reservation = await fetchUserReservation(data)
 
-    if (!reservation) {
+    if (!reservation.length) {
       return res.status(404).send({
         status: 'fail',
         data: {

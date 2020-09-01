@@ -6,7 +6,7 @@ import { OrderInstance, OrderAttributes } from './orders'
 
 export interface ReservationAttributes {
   id?: number
-  userId: number
+  userId: string
   date: Date
   price: number
   persons: number
@@ -26,7 +26,7 @@ export const ReservationModel = (
   const attributes: SequelizeAttributes<ReservationAttributes> = {
     userId: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     date: {
       allowNull: false,

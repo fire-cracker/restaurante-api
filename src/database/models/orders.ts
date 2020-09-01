@@ -5,6 +5,7 @@ import { ReservationInstance } from './reservations'
 import { MenuInstance } from './menus'
 
 export interface OrderAttributes {
+  id?: number
   reservationId: number
   menuId: number
   quantity: number
@@ -24,7 +25,6 @@ export const OrderModel = (
   const attributes: SequelizeAttributes<OrderAttributes> = {
     reservationId: {
       allowNull: false,
-      primaryKey: true,
       type: DataTypes.INTEGER
     },
     menuId: {

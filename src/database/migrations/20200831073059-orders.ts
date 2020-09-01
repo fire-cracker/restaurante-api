@@ -4,6 +4,12 @@ module.exports = {
   //@ts-ignore
   up: async (queryInterface, Sequelize) =>
     queryInterface.createTable('orders', {
+      id: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+        autoIncrement: true
+      },
       reservationId: {
         allowNull: false,
         type: Sequelize.INTEGER,

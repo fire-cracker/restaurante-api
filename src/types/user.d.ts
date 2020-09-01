@@ -4,7 +4,7 @@ export interface TimeStampInterface {
 }
 
 export interface UserInterface extends TimeStampInterface {
-  id: number
+  id: string
   username: string
   email: string
   role: string

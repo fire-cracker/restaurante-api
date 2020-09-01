@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import { SequelizeAttributes } from '../../types/database'
 
 export interface UserAttributes {
-  id?: number
+  id?: string
   username: string
   email: string
   password: string

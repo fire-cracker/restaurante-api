@@ -10,7 +10,7 @@ import { ReservationInstance } from '../../database/models/reservations'
  * @param {Integer} persons - number of people
  * @returns {Object} object
  */
-export const addReservation = (userId: number, date: Date, price: number, persons: number, orders: any) => {
+export const addReservation = (userId: string, date: Date, price: number, persons: number, orders: any) => {
   const newDate: any = new Date(date)
   const reservation = db.Reservation.create(
     { userId, date: newDate, price, persons, orders },

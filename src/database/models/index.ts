@@ -7,11 +7,9 @@ import { ReservationModel } from './reservations'
 import { OrderModel } from './orders'
 
 const env = process.env.NODE_ENV || 'development'
-console.log('env>>>>', env)
 const config = require('../config')[env]
 
 const url = config.url || process.env.DATABSE_URL
-console.log('url>>>>>>>>', url)
 const sequelize = new Sequelize(url, { ...config })
 
 const db: DbInterface = {

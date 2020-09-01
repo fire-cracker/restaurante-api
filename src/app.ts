@@ -4,7 +4,6 @@ import { createLogger, format, transports } from 'winston'
 import morgan from 'morgan'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { Server } from 'typescript-rest'
 
 import auth from './api/middlewares/authentication/authentication'
 import router from './api/routes'

@@ -13,7 +13,8 @@ export const getUserReservations = async (req: Request, res: Response): Promise<
   const {
     query: { date },
     params: { id }
-  } = (req as unknown) as { query: any; params: { id: number } }
+  } = (req as unknown) as { query: any; params: { id: string } }
+  console.log('data>>>>>', id)
   try {
     const data = date ? { userId: id, date } : { userId: id }
     const reservation = await fetchUserReservation(data)

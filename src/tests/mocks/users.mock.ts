@@ -3,35 +3,42 @@ export const userDetails = ['id', 'username', 'email', 'role', 'createdAt', 'upd
 export const newUser = {
   username: 'Oyedeji Peace',
   password: 'oyedejipeace',
-  email: 'oyedejipeace@performance.com'
+  email: 'oyedejipeace@performance.com',
 }
 export const newUser2 = {
   username: 'Oyedeji Oluwasegun',
   password: 'oluwasegun',
-  email: 'oluwasegun@gmail.com'
+  email: 'oluwasegun@gmail.com',
 }
 export const incorrectNewUser = {
   username: 'Oyedeji Peace',
   password: 'oyedejipeace',
-  email: 'oyedejipeace'
+  email: 'oyedejipeace',
 }
 
-export const loginUser = {
+export const adminLogin = {
   password: 'password',
-  email: 'johndoe@example.com'
+  email: 'johndoe@example.com',
+}
+
+export const customerLogin = {
+  password: 'password',
+  email: 'janedoe@example.com'
 }
 
 export const incorrectLoginDetails = {
   password: 'oyedejipeace2',
-  email: 'oyedejipeace@performance.com'
+  email: 'oyedejipeace@performance.com',
 }
 
 export const incorrectLoginDetails2 = {
   password: 'oyedejipeace',
-  email: 'oyedejipeace7@performance.com'
+  email: 'oyedejipeace7@performance.com',
 }
 
 export const incorrectLoginDetails3 = {
   password: 'oyedejipeace',
-  email: 'oyedejipeace7@'
+  email: 'oyedejipeace7@',
 }
+
+export const invalidUserToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImVtYWlsIjoib2x1d2FzZWd1QGdtYWlsLmNvbSIsImlhdCI6MTU3MDQ4ODg1OCwiZXhwIjoxNTcwNTc1MjU4fQ.icbT73cdkvCvzuPSUl_Z2RnSU1reBxATnEGAoFjHQbI'

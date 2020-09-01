@@ -46,12 +46,25 @@ export const createReservation = async (req: Request, res: Response): Promise<Re
  */
 export const getAllReservations = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
-    const { rows: reservations, count } = await fetchAllReservations()
+    const {
+      user: { role }
+    } = (req as unknown) as { user: UserInterface }
+
+    if (role !== 'admin') {
+      return res.status(401).send({
+        status: 'success',
+        data: {
+          message: 'Unauthorised to make this request'
+        }
+      })
+    }
+
+    const reservations = await fetchAllReservations()
     return res.status(200).send({
       status: 'success',
       data: {
         reservations,
-        count
+        count: reservations.length
       }
     })
   } catch (error) {
@@ -68,9 +81,22 @@ export const getAllReservations = async (req: Request, res: Response): Promise<R
  * @param {Object} res - response object
  * @returns {Object} JSON object (JSend format)
  */
-export const getReservation = async ({ params: { id } }: Request, res: Response): Promise<Response<any>> => {
+export const getReservation = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
-    const reservation = await fetchReservation(Number(id))
+    const {
+      params: { id },
+      user: { role }
+    } = (req as unknown) as { params: { id: number }; user: UserInterface }
+
+    if (role !== 'admin') {
+      return res.status(401).send({
+        status: 'success',
+        data: {
+          message: 'Unauthorised to make this request'
+        }
+      })
+    }
+    const reservation = await fetchReservation(id)
 
     if (!reservation) {
       return res.status(404).send({

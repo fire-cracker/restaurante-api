@@ -4,10 +4,10 @@
   "main": "src/app.ts",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/app.ts",
+    "start": "NODE_ENV=production ts-node src/app.ts",
     "start:dev": "yarn swagger && nodemon --watch src --exec ts-node src/app.ts",
-    "build": "rimraf ./build && tsc",
-    "test": "yarn migrate:seed && mocha -r ts-node/register src/tests/*.spec.ts --timeout 20000 --exit",
+    "build": "NODE_ENV=production rimraf ./build && tsc",
+    "test": "yarn migrate:seed && nyc mocha -r ts-node/register src/tests/*.spec.ts --timeout 20000 --exit",
     "lint": "eslint . --ext .ts",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "model:generate": "./node_modules/.bin/sequelize model:generate",
@@ -20,7 +20,8 @@
     "migrate:seed": "yarn undo:migration && yarn migrate && yarn seed",
     "docker:build": "docker build -t express-sequelize-typescript-boilerplate .",
     "docker:run": "docker run --rm -it -p 8080:8080 express-sequelize-typescript-boilerplate",
-    "swagger": "swaggerGen -c swagger.config.json"
+    "swagger": "swaggerGen -c swagger.config.json",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@hapi/joi": "15.1.0",
@@ -35,6 +36,7 @@
     "jsonwebtoken": "^8.5.1",
     "mocha": "^8.1.2",
     "morgan": "^1.10.0",
+    "nyc": "^15.1.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "pg": "^8.3.2",

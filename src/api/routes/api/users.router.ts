@@ -11,6 +11,6 @@ const usersRouter = express.Router()
 
 usersRouter.post('/auth/signup', createUserValidator, userSignup)
 usersRouter.post('/auth/login', userLoginValidator, userLogin)
-usersRouter.get('/users/reservations', passport.authenticate('jwt', { session: false }), authInterceptor, getUserReservations)
+usersRouter.get('/users/:id/reservations', passport.authenticate('jwt', { session: false }), authInterceptor, getUserReservations)
 
 export default usersRouter

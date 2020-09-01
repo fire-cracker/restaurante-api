@@ -1,7 +1,7 @@
 import { Response, Request } from 'express'
+import moment from 'moment'
 
 import { fetchUserReservation } from '../services/reservations.service'
-import { UserInterface } from '../../types/user'
 
 /**
  * @export
@@ -13,8 +13,8 @@ import { UserInterface } from '../../types/user'
 export const getUserReservations = async (req: Request, res: Response): Promise<Response<any>> => {
   const {
     query: { date },
-    user: { id }
-  } = (req as unknown) as { query: any; user: UserInterface }
+    params: { id }
+  } = (req as unknown) as { query: any; params: { id: number } }
   try {
     const data = date ? { userId: id, date } : { userId: id }
     const reservation = await fetchUserReservation(data)

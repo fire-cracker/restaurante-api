@@ -21,12 +21,6 @@ const db: DbInterface = {
   Order: OrderModel(sequelize, Sequelize)
 }
 
-// Object.values(db).forEach((model: any) => {
-//     if (model.associate) {
-//       model.associate(db)
-//     }
-//   })
-
 Object.values(db).forEach((model: any) => {
   if (model.associate) {
     model.associate(db)

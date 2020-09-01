@@ -1,5 +1,4 @@
 import { Response, Request } from 'express'
-import moment from 'moment'
 
 import { fetchUserReservation } from '../services/reservations.service'
 

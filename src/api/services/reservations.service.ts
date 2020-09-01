@@ -52,7 +52,14 @@ export const fetchReservation = (id: number): Promise<ReservationInstance> => {
 export const fetchUserReservation = (data: any): Promise<ReservationInstance[]> => {
   const reservation = db.Reservation.findAll({
     where: { ...data },
-    include: [{ model: db.Order, as: 'orders', include: [{ model: db.Menu, as: 'menus' }] }]
+    include: [
+      {
+        model: db.Order,
+        as: 'orders',
+        attributes: ['quantity'],
+        include: [{ model: db.Menu, as: 'menus', attributes: ['id', 'name', 'type', 'price'] }]
+      }
+    ]
   })
   return reservation
 }

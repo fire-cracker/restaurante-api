@@ -34,7 +34,6 @@ export const getAllMenus = async (req: Request, res: Response): Promise<Response
  */
 export const getMenu = async ({ params: { id } }: Request, res: Response): Promise<Response<any>> => {
   try {
-    // const { context, name } = req.query as { [key: string]: string}
     const menu = await fetchMenu(Number(id))
 
     if (!menu) {

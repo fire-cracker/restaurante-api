@@ -1,8 +1,8 @@
 import * as Sequelize from 'sequelize'
 
+import db from '../models'
 import { SequelizeAttributes } from '../../types/database'
 import { OrderInstance, OrderAttributes } from './orders'
-import { MenuInstance, MenuAttributes } from './menus'
 
 export interface ReservationAttributes {
   id?: number
@@ -12,13 +12,11 @@ export interface ReservationAttributes {
   persons: number
   createdAt?: Date
   updatedAt?: Date
+  orders?: OrderAttributes[] | OrderAttributes['reservationId'][]
 }
 
 export interface ReservationInstance extends Sequelize.Instance<ReservationAttributes>, ReservationAttributes {
-  createReservationMenu: Sequelize.BelongsToManyCreateAssociationMixin<MenuAttributes, MenuInstance['id'], 'orders'>
-  addReservationMenus: Sequelize.BelongsToManyAddAssociationsMixin<MenuAttributes, MenuInstance['id'], 'orders'>
-  addReservationMenu: Sequelize.BelongsToManyAddAssociationMixin<MenuAttributes, MenuInstance['id'], 'orders'>
-  setReservationMenus: Sequelize.BelongsToManySetAssociationsMixin<MenuAttributes, MenuInstance['id'], 'orders'>
+  getOrders: Sequelize.HasManyGetAssociationsMixin<OrderInstance>
 }
 
 export const ReservationModel = (
@@ -32,7 +30,7 @@ export const ReservationModel = (
     },
     date: {
       allowNull: false,
-      type: DataTypes.DATE
+      type: DataTypes.DATEONLY
     },
     price: {
       allowNull: false,
@@ -44,16 +42,17 @@ export const ReservationModel = (
     }
   }
 
-  const Reservation = sequelize.define<ReservationInstance, ReservationAttributes>('reservation', attributes)
+  const Reservation = sequelize.define<ReservationInstance, ReservationAttributes>('reservation', attributes, {
+    defaultScope: {
+      attributes: { exclude: ['updatedAt'] }
+    }
+  })
 
   Reservation.associate = models => {
     Reservation.belongsTo(models.User, { foreignKey: 'userId', as: 'reservee' })
-    Reservation.belongsToMany(models.Menu, {
+    Reservation.hasMany(models.Order, {
       foreignKey: 'reservationId',
-      otherKey: 'menuId',
-      through: 'orders',
-      timestamps: false,
-      as: 'reservationMenus'
+      as: 'orders'
     })
   }
 

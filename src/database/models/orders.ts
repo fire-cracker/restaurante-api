@@ -1,6 +1,8 @@
 import * as Sequelize from 'sequelize'
 
 import { SequelizeAttributes } from '../../types/database'
+import { ReservationInstance } from './reservations'
+import { MenuInstance } from './menus'
 
 export interface OrderAttributes {
   reservationId: number
@@ -10,7 +12,10 @@ export interface OrderAttributes {
   updatedAt?: Date
 }
 
-export interface OrderInstance extends Sequelize.Instance<OrderAttributes>, OrderAttributes {}
+export interface OrderInstance extends Sequelize.Instance<OrderAttributes>, OrderAttributes {
+  getReservee: Sequelize.BelongsToGetAssociationMixin<ReservationInstance>
+  getMenu: Sequelize.BelongsToGetAssociationMixin<MenuInstance>
+}
 
 export const OrderModel = (
   sequelize: Sequelize.Sequelize,
@@ -19,6 +24,7 @@ export const OrderModel = (
   const attributes: SequelizeAttributes<OrderAttributes> = {
     reservationId: {
       allowNull: false,
+      primaryKey: true,
       type: DataTypes.INTEGER
     },
     menuId: {
@@ -31,9 +37,19 @@ export const OrderModel = (
     }
   }
 
-  const Order = sequelize.define<OrderInstance, OrderAttributes>('order', attributes)
+  const Order = sequelize.define<OrderInstance, OrderAttributes>('order', attributes, {
+    defaultScope: {
+      attributes: { exclude: ['updatedAt'] }
+    }
+  })
 
-  Order.associate = models => {}
+  Order.associate = models => {
+    Order.belongsTo(models.Reservation, { foreignKey: 'reservationId', as: 'orderReserveee' })
+    Order.belongsTo(models.Menu, {
+      foreignKey: 'menuId',
+      as: 'menus'
+    })
+  }
 
   return Order
 }

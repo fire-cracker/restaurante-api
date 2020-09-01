@@ -4,7 +4,6 @@ import { createLogger, format, transports } from 'winston'
 import morgan from 'morgan'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { Server } from 'typescript-rest'
 
 import auth from './api/middlewares/authentication/authentication'
 import router from './api/routes'
@@ -28,12 +27,12 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// routes
-Server.swagger(app, {
-  endpoint: 'api-docs',
-  filePath: './api.docs/swagger.json',
-  schemes: ['http']
-})
+// // routes
+// Server.swagger(app, {
+//   endpoint: 'api-docs',
+//   filePath: './api.docs/swagger.json',
+//   schemes: ['http']
+// })
 
 app.use(auth.initialize())
 app.use(router)

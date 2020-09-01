@@ -10,7 +10,6 @@ const env = process.env.NODE_ENV || 'development'
 const config = require('../config')[env]
 
 const url = config.url || process.env.DATABSE_URL
-
 const sequelize = new Sequelize(url, { ...config })
 
 const db: DbInterface = {
@@ -21,12 +20,6 @@ const db: DbInterface = {
   Reservation: ReservationModel(sequelize, Sequelize),
   Order: OrderModel(sequelize, Sequelize)
 }
-
-// Object.values(db).forEach((model: any) => {
-//     if (model.associate) {
-//       model.associate(db)
-//     }
-//   })
 
 Object.values(db).forEach((model: any) => {
   if (model.associate) {

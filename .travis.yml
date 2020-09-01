@@ -4,7 +4,7 @@ node_js:
   - 'stable'
 
 addons:
-  postgresql: 'stable'
+  postgresql: '9.6'
 
 services:
   - postgresql
@@ -13,6 +13,6 @@ before_install:
   - yarn install
 
 before_script:
-  - psql -c 'create database restaurant_db;' -U postgres
+  - psql -c 'create database restaurante_db;' -U postgres
 
-after_success: npm run coverage
+after_success: yarn coverage

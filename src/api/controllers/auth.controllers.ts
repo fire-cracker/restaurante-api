@@ -2,7 +2,7 @@ import { Response, Request } from 'express'
 import { Tags } from 'typescript-rest-swagger'
 
 import { createUser, getUser } from '../services/users.service'
-import { signToken, validatePassword } from '../../utils'
+import { signToken } from '../../utils'
 
 /**
  * @export
@@ -67,12 +67,12 @@ export const userLogin = async (req: Request, res: Response): Promise<Response<a
       })
     }
 
-    // if (user.validatePassword(password) === false) {
-    //   return res.status(404).send({
-    //     status: 'fail',
-    //     data: { message: 'Provide correct login credentials' }
-    //   })
-    // }
+    if ((await user.validatePassword(password)) === false) {
+      return res.status(404).send({
+        status: 'fail',
+        data: { message: 'Provide correct login credentials' }
+      })
+    }
 
     const userToken = signToken({
       role: 'user',

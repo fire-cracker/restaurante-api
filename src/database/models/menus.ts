@@ -45,12 +45,10 @@ export const MenuModel = (
   const Menu = sequelize.define<MenuInstance, MenuAttributes>('menu', attributes)
 
   Menu.associate = models => {
-    // Menu.hasMany(models.Comment, { foreignKey: 'AuthorId', as: 'comments' })
-    // Menu.hasMany(models.Post, { foreignKey: 'AuthorId', as: 'posts' })
-    // Menu.belongsToMany(models.Comment, {
-    //   through: 'PostUpvotes',
-    //   as: 'upvotedComments'
-    // })
+    Menu.hasMany(models.Order, {
+      foreignKey: 'menuId',
+      as: 'menus'
+    })
   }
 
   return Menu

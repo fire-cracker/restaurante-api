@@ -6,6 +6,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { Server } from 'typescript-rest'
 
+import auth from './api/middlewares/authentication/authentication'
 import router from './api/routes'
 
 dotenv.config()
@@ -33,6 +34,8 @@ Server.swagger(app, {
   filePath: './api.docs/swagger.json',
   schemes: ['http']
 })
+
+app.use(auth.initialize())
 app.use(router)
 
 app.get('*', (req: Request, res: Response) =>

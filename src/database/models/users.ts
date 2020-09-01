@@ -14,16 +14,12 @@ export interface UserAttributes {
 }
 
 export interface UserInstance extends Sequelize.Instance<UserAttributes>, UserAttributes {
-  prototype: {
-    validatePassword: (password: string) => boolean
-    password: string
-  }
+  validatePassword: (password: string) => boolean
 }
 
 interface UserModelInstanceMethods extends Sequelize.Model<UserInstance, UserAttributes> {
   prototype: {
-    validatePassword: (password: string) => boolean
-    password: string
+    validatePassword: (password: string) => Promise<boolean>
   }
 }
 
@@ -63,16 +59,11 @@ export const UserModel = (
   })
 
   User.associate = models => {
-    // User.hasMany(models.Comment, { foreignKey: 'AuthorId', as: 'comments' })
-    // User.hasMany(models.Post, { foreignKey: 'AuthorId', as: 'posts' })
-    // User.belongsToMany(models.Comment, {
-    //   through: 'PostUpvotes',
-    //   as: 'upvotedComments'
-    // })
+    User.hasMany(models.Reservation, { foreignKey: 'userId', as: 'userReservations' })
   }
 
-  User.prototype.validatePassword = function (newPassword) {
-    console.log('helloooooooo')
+  User.prototype.validatePassword = async function (this: UserInstance, newPassword) {
+    await this.reload({ attributes: { include: [] } })
     return bcrypt.compareSync(newPassword, this.password)
   }
 

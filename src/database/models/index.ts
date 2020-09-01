@@ -10,7 +10,6 @@ const env = process.env.NODE_ENV || 'development'
 const config = require('../config')[env]
 
 const url = config.url || process.env.DATABSE_URL
-
 const sequelize = new Sequelize(url, { ...config })
 
 const db: DbInterface = {

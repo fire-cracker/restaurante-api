@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production yarn swagger && ts-node src/app.ts",
     "start:dev": "yarn swagger && nodemon --watch src --exec ts-node src/app.ts",
     "build": "NODE_ENV=production rimraf ./build && tsc",
-    "test": "yarn migrate:seed && nyc mocha -r ts-node/register src/tests/*.spec.ts --timeout 20000 --exit",
+    "test": "NODE_ENV=test yarn migrate:seed && nyc mocha -r ts-node/register src/tests/*.spec.ts --timeout 20000 --exit",
     "lint": "eslint . --ext .ts",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "model:generate": "./node_modules/.bin/sequelize model:generate",

@@ -4,7 +4,7 @@ node_js:
   - 'stable'
 
 addons:
-  postgresql: 'stable'
+  postgresql: '9.6'
 
 services:
   - postgresql

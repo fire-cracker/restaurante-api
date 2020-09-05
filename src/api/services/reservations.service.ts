@@ -6,18 +6,24 @@ import { ReservationInstance } from '../../database/models/reservations'
  * @function addReservation
  * @param {Integer} userId -id of the user
  * @param {Date} date - reservation date
+ * @param {String} time - reservation time
  * @param {Integer} price - reservation price
  * @param {Integer} persons - number of people
+ * @param {String} type - type of menu
+ * @param {String} stripeId - stripeId
  * @returns {Object} object
  */
-export const addReservation = (userId: string, date: Date, price: number, persons: number, orders: any) => {
+export const addReservation = (
+  userId: string,
+  date: Date,
+  time: string,
+  type: string,
+  price: number,
+  persons: number,
+  stripeId: string
+): Promise<ReservationInstance> => {
   const newDate: any = new Date(date)
-  const reservation = db.Reservation.create(
-    { userId, date: newDate, price, persons, orders },
-    {
-      include: [{ model: db.Order, as: 'orders' }]
-    }
-  )
+  const reservation = db.Reservation.create({ userId, date: newDate, time, type, price, persons, stripeId })
   return reservation
 }
 
@@ -27,16 +33,7 @@ export const addReservation = (userId: string, date: Date, price: number, person
  * @returns {Object} object
  */
 export const fetchAllReservations = (): Promise<ReservationInstance[]> => {
-  const reservations = db.Reservation.findAll({
-    include: [
-      {
-        model: db.Order,
-        as: 'orders',
-        attributes: ['id', 'quantity'],
-        include: [{ model: db.Menu, as: 'menus', attributes: ['id', 'name', 'type', 'price'] }]
-      }
-    ]
-  })
+  const reservations = db.Reservation.findAll()
   return reservations
 }
 
@@ -47,16 +44,7 @@ export const fetchAllReservations = (): Promise<ReservationInstance[]> => {
  * @returns {Object} object
  */
 export const fetchReservation = (id: number): Promise<ReservationInstance> => {
-  const reservation = db.Reservation.findByPk(id, {
-    include: [
-      {
-        model: db.Order,
-        as: 'orders',
-        attributes: ['id', 'quantity'],
-        include: [{ model: db.Menu, as: 'menus', attributes: ['id', 'name', 'type', 'price'] }]
-      }
-    ]
-  })
+  const reservation = db.Reservation.findByPk(id)
   return reservation
 }
 
@@ -67,16 +55,6 @@ export const fetchReservation = (id: number): Promise<ReservationInstance> => {
  * @returns {Object} object
  */
 export const fetchUserReservation = (data: { userId: string; date?: Date }): Promise<ReservationInstance[]> => {
-  const reservation = db.Reservation.findAll({
-    where: { ...data },
-    include: [
-      {
-        model: db.Order,
-        as: 'orders',
-        attributes: ['id', 'quantity'],
-        include: [{ model: db.Menu, as: 'menus', attributes: ['id', 'name', 'type', 'price'] }]
-      }
-    ]
-  })
+  const reservation = db.Reservation.findAll({ where: { ...data } })
   return reservation
 }

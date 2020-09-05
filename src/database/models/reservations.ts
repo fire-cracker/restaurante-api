@@ -1,23 +1,21 @@
 import * as Sequelize from 'sequelize'
 
-import db from '../models'
 import { SequelizeAttributes } from '../../types/database'
-import { OrderInstance, OrderAttributes } from './orders'
 
 export interface ReservationAttributes {
   id?: number
   userId: string
   date: Date
+  time: string
+  type: string
   price: number
   persons: number
+  stripeId: string
   createdAt?: Date
   updatedAt?: Date
-  orders?: OrderAttributes[] | OrderAttributes['reservationId'][]
 }
 
-export interface ReservationInstance extends Sequelize.Instance<ReservationAttributes>, ReservationAttributes {
-  getOrders: Sequelize.HasManyGetAssociationsMixin<OrderInstance>
-}
+export interface ReservationInstance extends Sequelize.Instance<ReservationAttributes>, ReservationAttributes {}
 
 export const ReservationModel = (
   sequelize: Sequelize.Sequelize,
@@ -32,9 +30,21 @@ export const ReservationModel = (
       allowNull: false,
       type: DataTypes.DATEONLY
     },
+    time: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    type: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
     price: {
       allowNull: false,
       type: DataTypes.INTEGER
+    },
+    stripeId: {
+      allowNull: false,
+      type: DataTypes.STRING
     },
     persons: {
       allowNull: false,
@@ -50,10 +60,6 @@ export const ReservationModel = (
 
   Reservation.associate = models => {
     Reservation.belongsTo(models.User, { foreignKey: 'userId', as: 'reservee' })
-    Reservation.hasMany(models.Order, {
-      foreignKey: 'reservationId',
-      as: 'orders'
-    })
   }
 
   return Reservation

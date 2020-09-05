@@ -44,6 +44,7 @@
     "rimraf": "^3.0.2",
     "sequelize": "4",
     "sequelize-cli": "^6.2.0",
+    "stripe": "^8.92.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2",
     "typescript-rest-swagger": "^1.1.4",

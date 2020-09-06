@@ -1,7 +1,7 @@
 import passport from 'passport'
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt'
 
-import { getUser } from '../../services/users.service'
+import { fetchUser } from '../../services/users.service'
 import { UserInstance } from '../../../database/models/users'
 
 const options = {
@@ -12,7 +12,7 @@ const options = {
 passport.use(
   new JWTStrategy(options, async (payload, done) => {
     try {
-      const user = (await getUser(payload.email)) as UserInstance
+      const user = (await fetchUser({ email: payload.email })) as UserInstance
       if (!user) {
         return done(null, {
           status: 'fail',

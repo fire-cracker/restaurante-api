@@ -28,8 +28,8 @@ export const createUser = (username: string, email: string, password: string, ro
 
 /**
  * @export
- * @function getUser
- * @param {String} email - customer email
+ * @function fetchUser
+ * @param {Object} data - data object
  * @returns {Object} object
  */
-export const getUser = (email: string): Promise<UserInstance> => db.User.findOne({ where: { email: { [Op.eq]: email } } })
+export const fetchUser = (data: { email?: string; id?: string }): Promise<UserInstance> => db.User.findOne({ where: { ...data } })

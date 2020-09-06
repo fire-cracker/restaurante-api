@@ -1,7 +1,7 @@
 import { Response, Request } from 'express'
 import { Tags } from 'typescript-rest-swagger'
 
-import { createUser, getUser } from '../services/users.service'
+import { createUser, fetchUser } from '../services/users.service'
 import { UserInstance } from '../../database/models/users'
 import { signToken } from '../../helpers/utils'
 import { UserInterface } from '../../types/user'
@@ -19,7 +19,7 @@ export const userSignup = async (req: Request, res: Response): Promise<Response<
       body: { username, email, password }
     } = req
 
-    const userExist = (await getUser(email)) as UserInstance
+    const userExist = (await fetchUser({ email })) as UserInstance
 
     if (userExist) {
       return res.status(409).send({
@@ -60,7 +60,7 @@ export const userLogin = async (req: Request, res: Response): Promise<Response<a
     const {
       body: { email, password }
     } = req
-    const user = (await getUser(email)) as UserInstance
+    const user = (await fetchUser({ email })) as UserInstance
 
     if (!user) {
       return res.status(404).send({

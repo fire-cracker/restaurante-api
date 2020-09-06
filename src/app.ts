@@ -19,8 +19,8 @@ const logger = createLogger({
 const app: express.Application = express()
 const corsOptions = {
   credentials: true,
-  origin: [],
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  origin: true,
+  optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions))
 app.use(morgan('dev'))

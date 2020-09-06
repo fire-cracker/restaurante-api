@@ -3,7 +3,7 @@ import { Tags } from 'typescript-rest-swagger'
 
 import { createUser, getUser } from '../services/users.service'
 import { UserInstance } from '../../database/models/users'
-import { signToken } from '../../utils'
+import { signToken } from '../../helpers/utils'
 import { UserInterface } from '../../types/user'
 
 /**

@@ -33,14 +33,7 @@ describe('Tests for reservations', () => {
         .to.be.an.instanceof(Object)
         .and.to.have.property('data')
         .and.to.have.property('reservation')
-        .that.includes.all.keys('id', 'date', 'price', 'userId', 'persons', 'orders')
-        .and.to.have.property('orders')
-        .and.to.be.an.instanceof(Array)
-        .and.to.have.property('0')
-        .that.includes.all.keys('quantity', 'menus')
-        .and.to.have.property('menus')
-        .to.be.an.instanceof(Object)
-        .that.includes.all.keys('id', 'name', 'price', 'type')
+        .that.includes.all.keys('id', 'date', 'time', 'price', 'userId', 'type', 'persons', 'stripeId')
     })
 
     it('should return error if request to create reservation is incorrect', async () => {
@@ -75,7 +68,7 @@ describe('Tests for reservations', () => {
         .and.to.be.an.instanceof(Array)
         .and.to.have.length.greaterThan(0)
         .and.to.have.property('0')
-        .that.includes.all.keys('id', 'date', 'price', 'userId', 'persons')
+        .that.includes.all.keys('id', 'date', 'time', 'price', 'userId', 'type', 'persons', 'stripeId')
     })
 
     it('should return error if request was not made by the admin', async () => {
@@ -99,14 +92,7 @@ describe('Tests for reservations', () => {
         .that.includes.all.keys('status', 'data')
         .and.to.have.property('data')
         .and.to.have.property('reservation')
-        .that.includes.all.keys('id', 'date', 'price', 'userId', 'persons', 'orders')
-        .and.to.have.property('orders')
-        .and.to.be.an.instanceof(Array)
-        .and.to.have.property('0')
-        .that.includes.all.keys('quantity', 'menus')
-        .and.to.have.property('menus')
-        .to.be.an.instanceof(Object)
-        .that.includes.all.keys('id', 'name', 'price', 'type')
+        .that.includes.all.keys('id', 'date', 'time', 'price', 'userId', 'type', 'persons', 'stripeId')
     })
 
     it('should return error if request was not made by the admin', async () => {

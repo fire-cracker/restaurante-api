@@ -3,7 +3,7 @@ import { Response, Request } from 'express'
 import { addReservation, fetchAllReservations, fetchReservation } from '../services/reservations.service'
 import { UserInterface, NewReservationInterface } from '../../types/user'
 import { ReservationInstance } from '../../database/models/reservations'
-import db from '../../database/models'
+import { stripeCharge } from '../../helpers/stripe'
 
 /**
  * @export
@@ -15,19 +15,36 @@ import db from '../../database/models'
 export const createReservation = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
     const {
-      body: { date, orders, price, persons },
-      user: { id }
+      body: { date, time, type, stripeToken, persons },
+      user: { id, email }
     } = (req as unknown) as { body: NewReservationInterface; user: UserInterface }
 
-    const newReservation = (await addReservation(id, date, price, persons, orders)) as ReservationInstance
-    const reservationOrders = await newReservation.getOrders({
-      include: { model: db.Menu, as: 'menus', attributes: ['id', 'name', 'type', 'price'] }
-    })
-    const reservation = { ...newReservation.toJSON(), orders: reservationOrders }
+    const stripeCharges = await stripeCharge(persons * 1000, 'usd', stripeToken, email)
+
+    if (stripeCharges.statusCode === 400) {
+      return res.status(400).send({
+        error: {
+          code: stripeCharges.code,
+          message: stripeCharges.message,
+          field: stripeCharges.param
+        }
+      })
+    }
+
+    const newReservation = (await addReservation(
+      id,
+      date,
+      time,
+      type,
+      persons * 1000,
+      persons,
+      stripeCharges.id
+    )) as ReservationInstance
+
     return res.status(200).send({
       status: 'success',
       data: {
-        reservation
+        reservation: newReservation
       }
     })
   } catch (error) {

@@ -22,6 +22,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATEONLY
       },
+      time: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      type: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       price: {
         allowNull: false,
         type: Sequelize.INTEGER
@@ -29,6 +37,10 @@ module.exports = {
       persons: {
         allowNull: false,
         type: Sequelize.INTEGER
+      },
+      stripeId: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

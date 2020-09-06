@@ -147,14 +147,7 @@ describe('Tests for users', () => {
         .and.to.have.property('reservation')
         .and.to.be.an.instanceof(Array)
         .and.to.have.property('0')
-        .that.includes.all.keys('id', 'date', 'price', 'userId', 'persons', 'orders')
-        .and.to.have.property('orders')
-        .and.to.be.an.instanceof(Array)
-        .and.to.have.property('0')
-        .that.includes.all.keys('quantity', 'menus')
-        .and.to.have.property('menus')
-        .to.be.an.instanceof(Object)
-        .that.includes.all.keys('id', 'name', 'price', 'type')
+        .that.includes.all.keys('id', 'date', 'time', 'price', 'userId', 'type', 'persons', 'stripeId')
     })
 
     it('should get users reservations if request made by admin and is correct', async () => {
@@ -167,14 +160,7 @@ describe('Tests for users', () => {
         .and.to.have.property('reservation')
         .and.to.be.an.instanceof(Array)
         .and.to.have.property('0')
-        .that.includes.all.keys('id', 'date', 'price', 'userId', 'persons', 'orders')
-        .and.to.have.property('orders')
-        .and.to.be.an.instanceof(Array)
-        .and.to.have.property('0')
-        .that.includes.all.keys('quantity', 'menus')
-        .and.to.have.property('menus')
-        .to.be.an.instanceof(Object)
-        .that.includes.all.keys('id', 'name', 'price', 'type')
+        .that.includes.all.keys('id', 'date', 'time', 'price', 'userId', 'type', 'persons', 'stripeId')
     })
 
     it('should error if request is made by another user who is not an admin', async () => {

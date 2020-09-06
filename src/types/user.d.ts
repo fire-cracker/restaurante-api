@@ -18,8 +18,9 @@ export interface NewUserInterface {
 
 export interface NewReservationInterface {
   date: Date
-  orders: any
-  price: number
+  time: string
+  type: string
+  stripeToken: string
   persons: number
 }
 

@@ -1,22 +1,17 @@
 import Joi from '@hapi/joi'
 
 const date = Joi.date().required()
-const price = Joi.number().integer().min(0).max(10000).required()
+const stripeToken = Joi.string().trim().required()
 const persons = Joi.number().integer().min(1).max(6).required()
-const orders = Joi.array()
-  .items(
-    Joi.object()
-      .keys({
-        menuId: Joi.number().integer().min(1).max(100).required(),
-        quantity: Joi.number().integer().min(1).max(100).required()
-      })
-      .required()
-  )
+const time = Joi.string()
+  .regex(/^([01]\d|2[0-3]):?([0-5]\d)$/)
   .required()
+const type = Joi.string().trim().valid(['breakfast', 'lunch', 'dinner', 'drinks']).required()
 
 export const createReservationSchema = Joi.object().keys({
   date,
-  price,
+  stripeToken,
   persons,
-  orders
+  time,
+  type
 })

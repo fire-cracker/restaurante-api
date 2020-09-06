@@ -185,4 +185,50 @@ describe('Tests for users', () => {
         .and.to.equal('Reservation does not exist')
     })
   })
+
+  describe('Tests for get user', () => {
+    it('should get user details if request made by owner and is correct', async () => {
+      const res = await chai.request(app).get(`/users/${customerId}`).set('Authorization', `${customerToken}`)
+      expect(res).to.have.status(200)
+      expect(res.body)
+        .to.be.an.instanceof(Object)
+        .that.includes.all.keys('status', 'data')
+        .and.to.have.property('data')
+        .and.to.have.property('user')
+        .that.includes.all.keys(userDetails)
+    })
+
+    it('should get users reservations if request made by admin and is correct', async () => {
+      const res = await chai.request(app).get(`/users/${customerId}`).set('Authorization', `${adminToken}`)
+      expect(res).to.have.status(200)
+      expect(res.body)
+        .to.be.an.instanceof(Object)
+        .that.includes.all.keys('status', 'data')
+        .and.to.have.property('data')
+        .and.to.have.property('user')
+        .that.includes.all.keys(userDetails)
+    })
+
+    it('should error if request is made by another user who is not an admin', async () => {
+      const res = await chai.request(app).get(`/users/${customerId}`).set('Authorization', `${customerToken2}`)
+      expect(res).to.have.status(401)
+      expect(res.body)
+        .to.be.an.instanceof(Object)
+        .that.includes.all.keys('status', 'data')
+        .and.to.have.property('data')
+        .and.to.have.deep.property('message')
+        .and.to.equal('Unauthorised to make this request')
+    })
+
+    it('should error if user does not exist', async () => {
+      const res = await chai.request(app).get('/users/77abf754-3be2-40fc-a3a9-595f3aab50d7').set('Authorization', `${adminToken}`)
+      expect(res).to.have.status(404)
+      expect(res.body)
+        .to.be.an.instanceof(Object)
+        .that.includes.all.keys('status', 'data')
+        .and.to.have.property('data')
+        .and.to.have.deep.property('message')
+        .and.to.equal('User does not exist')
+    })
+  })
 })

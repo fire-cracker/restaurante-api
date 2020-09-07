@@ -12,7 +12,7 @@ const options = {
 passport.use(
   new JWTStrategy(options, async (payload, done) => {
     try {
-      const user = (await fetchUser({ email: payload.email })) as UserInstance
+      const user = (await fetchUser({ id: payload.id })) as UserInstance
       if (!user) {
         return done(null, {
           status: 'fail',

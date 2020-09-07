@@ -8,7 +8,7 @@ const secret = process.env.JWT_SECRET || 'shhhhhh'
  * @param {Object} payload - user object
  * @returns {string} Jwt token
  */
-export const signToken = (payload: { userId: string; role: string; email: string }): string =>
+export const signToken = (payload: { id: string; username: string; role: string }): string =>
   jwt.sign(payload, secret, { expiresIn: '24h' })
 
 /**

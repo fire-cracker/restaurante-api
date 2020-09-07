@@ -29,9 +29,9 @@ export const userSignup = async (req: Request, res: Response): Promise<Response<
 
     const user = (await createUser(username, email, password)) as UserInstance
     const userToken: string = signToken({
-      userId: user.id!,
-      role: user.role!,
-      email
+      id: user.id!,
+      username: user.username,
+      role: user.role!
     })
 
     const newUser = user.toJSON()
@@ -80,9 +80,9 @@ export const userLogin = async (req: Request, res: Response): Promise<Response<a
     }
 
     const userToken: string = signToken({
-      userId: user.id!,
-      role: user.role!,
-      email
+      id: user.id!,
+      username: user.username,
+      role: user.role!
     })
 
     const newUser = user.toJSON()

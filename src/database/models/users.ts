@@ -7,7 +7,7 @@ export interface UserAttributes {
   id?: string
   username: string
   email: string
-  password: string
+  password?: string
   role?: 'customer' | 'admin'
   createdAt?: Date
   updatedAt?: Date
@@ -47,11 +47,7 @@ export const UserModel = (
     }
   }
 
-  const User = sequelize.define<UserInstance, UserAttributes>('user', attributes, {
-    defaultScope: {
-      attributes: { exclude: ['password'] }
-    }
-  }) as UserModelInstanceMethods
+  const User = sequelize.define<UserInstance, UserAttributes>('user', attributes) as UserModelInstanceMethods
 
   User.beforeCreate(async user => {
     const salt = await bcrypt.genSaltSync()
@@ -63,8 +59,7 @@ export const UserModel = (
   }
 
   User.prototype.validatePassword = async function (this: UserInstance, newPassword) {
-    await this.reload({ attributes: { include: [] } })
-    return bcrypt.compareSync(newPassword, this.password)
+    return bcrypt.compareSync(newPassword, this.password!)
   }
 
   return User

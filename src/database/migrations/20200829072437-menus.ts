@@ -24,7 +24,7 @@ module.exports = {
       },
       recipe: {
         allowNull: false,
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.STRING
       },
       type: {
         allowNull: false,

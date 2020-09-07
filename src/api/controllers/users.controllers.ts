@@ -86,10 +86,13 @@ export const getUser = async (req: Request, res: Response): Promise<Response<any
       })
     }
 
+    const newUser = user.toJSON()
+    delete newUser.password
+
     return res.status(200).send({
       status: 'success',
       data: {
-        user
+        user: newUser
       }
     })
   } catch (error) {

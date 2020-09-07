@@ -1,5 +1,4 @@
 import { Response, Request } from 'express'
-import { Tags } from 'typescript-rest-swagger'
 
 import { createUser, fetchUser } from '../services/users.service'
 import { UserInstance } from '../../database/models/users'
@@ -28,16 +27,20 @@ export const userSignup = async (req: Request, res: Response): Promise<Response<
       })
     }
 
-    const user = (await createUser(username, email, password)) as UserInterface
+    const user = (await createUser(username, email, password)) as UserInstance
     const userToken: string = signToken({
-      role: user.role,
+      userId: user.id!,
+      role: user.role!,
       email
     })
+
+    const newUser = user.toJSON()
+    delete newUser.password
 
     return res.status(200).send({
       status: 'success',
       data: {
-        user,
+        user: newUser,
         token: `Bearer ${userToken}`
       }
     })
@@ -77,14 +80,18 @@ export const userLogin = async (req: Request, res: Response): Promise<Response<a
     }
 
     const userToken: string = signToken({
+      userId: user.id!,
       role: user.role!,
       email
     })
 
+    const newUser = user.toJSON()
+    delete newUser.password
+
     return res.status(200).send({
       status: 'success',
       data: {
-        user,
+        user: newUser,
         token: `Bearer ${userToken}`
       }
     })

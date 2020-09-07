@@ -66,6 +66,7 @@ describe('Tests for users', () => {
         .that.includes.all.keys('user', 'token')
         .and.to.have.property('user')
         .that.includes.all.keys(userDetails)
+        .and.to.not.include.keys('password')
     })
 
     it('should return error if request to create user is incorrect', async () => {
@@ -101,6 +102,7 @@ describe('Tests for users', () => {
         .that.includes.all.keys('user', 'token')
         .and.to.have.property('user')
         .that.includes.all.keys(userDetails)
+        .and.to.not.include.keys('password')
     })
 
     it('should return error if user password is incorrect', async () => {
@@ -196,6 +198,7 @@ describe('Tests for users', () => {
         .and.to.have.property('data')
         .and.to.have.property('user')
         .that.includes.all.keys(userDetails)
+        .and.to.not.include.keys('password')
     })
 
     it('should get users reservations if request made by admin and is correct', async () => {
@@ -207,6 +210,7 @@ describe('Tests for users', () => {
         .and.to.have.property('data')
         .and.to.have.property('user')
         .that.includes.all.keys(userDetails)
+        .and.to.not.include.keys('password')
     })
 
     it('should error if request is made by another user who is not an admin', async () => {

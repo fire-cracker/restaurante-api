@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
 
 const secret = process.env.JWT_SECRET || 'shhhhhh'
 
@@ -9,7 +8,8 @@ const secret = process.env.JWT_SECRET || 'shhhhhh'
  * @param {Object} payload - user object
  * @returns {string} Jwt token
  */
-export const signToken = (payload: { role: string; email: string }): string => jwt.sign(payload, secret, { expiresIn: '24h' })
+export const signToken = (payload: { userId: string; role: string; email: string }): string =>
+  jwt.sign(payload, secret, { expiresIn: '24h' })
 
 /**
  * @export

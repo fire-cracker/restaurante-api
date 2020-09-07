@@ -34,7 +34,7 @@ export const MenuModel = (
     },
     recipe: {
       allowNull: false,
-      type: DataTypes.ARRAY(DataTypes.STRING)
+      type: DataTypes.STRING
     },
     type: {
       allowNull: false,

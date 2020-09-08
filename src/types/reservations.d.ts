@@ -18,8 +18,3 @@ export interface IReservation extends TimeStampInterface {
   price: number
   persons: number
 }
-
-export interface IReservationCharge {
-  stripeToken: string
-  price: number
-}

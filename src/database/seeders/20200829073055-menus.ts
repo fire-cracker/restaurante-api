@@ -41,7 +41,8 @@ module.exports = {
           image:
             'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/12/19/MW207_Mini-Kale-Shakshuka_s4x3.jpg.rend.hgtvcom.826.620.suffix/1545245389206.jpeg',
           price: 75,
-          recipe: 'feta cheese, kale, sweet paprika, garlic, red pepper flakes, Greek yogurt, parsley',
+          recipe:
+            'feta cheese, kale, sweet paprika, garlic, red pepper flakes, Greek yogurt, parsley',
           type: 'breakfast',
           createdAt: new Date(),
           updatedAt: new Date()
@@ -51,7 +52,8 @@ module.exports = {
           image:
             'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2011/12/6/0/CC-ellie-krieger_tuscan-vegetable-soup-recipe_s4x3.jpg.rend.hgtvcom.826.620.suffix/1389125372910.jpeg',
           price: 60,
-          recipe: 'canellini beans, carrots, zucchini, celery, garlic, sage leaves, ground black pepper',
+          recipe:
+            'canellini beans, carrots, zucchini, celery, garlic, sage leaves, ground black pepper',
           type: 'lunch',
           createdAt: new Date(),
           updatedAt: new Date()
@@ -71,7 +73,8 @@ module.exports = {
           image:
             'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2011/4/19/0/FN_quinoa-004_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382539861840.jpeg',
           price: 60,
-          recipe: 'quinoa, basil leaves, parsley leaves, garlic, red pepper flakes, ground black pepper',
+          recipe:
+            'quinoa, basil leaves, parsley leaves, garlic, red pepper flakes, ground black pepper',
           type: 'lunch',
           createdAt: new Date(),
           updatedAt: new Date()
@@ -81,7 +84,8 @@ module.exports = {
           image:
             'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2011/11/4/1/CCHAP402_Sloppy-Joes_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382540648899.jpeg',
           price: 40,
-          recipe: 'Beef, jalapeno, red beans, garlic, red wine vinegar, Worcestershire sauce, mustard powder',
+          recipe:
+            'Beef, jalapeno, red beans, garlic, red wine vinegar, Worcestershire sauce, mustard powder',
           type: 'lunch',
           createdAt: new Date(),
           updatedAt: new Date()
@@ -91,7 +95,8 @@ module.exports = {
           image:
             'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2010/8/12/0/FN-Thanksgiving-2010_Brussels-Sprouts_s4x3.jpg.rend.hgtvcom.826.620.suffix/1384540892898.jpeg',
           price: 50,
-          recipe: 'Brussels sprouts, freshly ground black pepper, sweet paprika, garlic, red pepper flakes',
+          recipe:
+            'Brussels sprouts, freshly ground black pepper, sweet paprika, garlic, red pepper flakes',
           type: 'dinner',
           createdAt: new Date(),
           updatedAt: new Date()
@@ -101,7 +106,8 @@ module.exports = {
           image:
             'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2004/5/14/0/bw2c12_chicken_broccoli2.jpg.rend.hgtvcom.826.620.suffix/1371584021202.jpeg',
           price: 60,
-          recipe: 'Chicken, Broccoli, sesame oil, garlic, red pepper flakes, Jasmine rice, sherry, soy sauce',
+          recipe:
+            'Chicken, Broccoli, sesame oil, garlic, red pepper flakes, Jasmine rice, sherry, soy sauce',
           type: 'dinner',
           createdAt: new Date(),
           updatedAt: new Date()
@@ -121,14 +127,16 @@ module.exports = {
           image:
             'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/10/26/0/FNK_Healthy-Creamy-Spinach-Baked-Penne_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382541947211.jpeg',
           price: 40,
-          recipe: 'cottage cheese, penne, fennel seeds, garlic, ground black pepper, basil leaves, mozzarella, Parmesan',
+          recipe:
+            'cottage cheese, penne, fennel seeds, garlic, ground black pepper, basil leaves, mozzarella, Parmesan',
           type: 'dinner',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Bullshot',
-          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRrdiOwl_wq5OlTsMK96nA2G4cOAPfpSCsp7g&usqp=CAU',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRrdiOwl_wq5OlTsMK96nA2G4cOAPfpSCsp7g&usqp=CAU',
           price: 80,
           recipe: 'vodka, beef bouillon, Worcestshire sauce',
           type: 'drink',
@@ -137,7 +145,8 @@ module.exports = {
         },
         {
           name: 'Rosemary Salty Dog',
-          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgTNahzwqBd5bSGTk2piDN8-S_PtXvn-4ZWA&usqp=CAU',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgTNahzwqBd5bSGTk2piDN8-S_PtXvn-4ZWA&usqp=CAU',
           price: 90,
           recipe: 'gin, grapefruit juice, rosemary syrup',
           type: 'drink',
@@ -146,7 +155,8 @@ module.exports = {
         },
         {
           name: 'Thyme Lemonade',
-          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRgajyU-Ba0kZKKf3Q1A-B1fJolUuY_aftTEg&usqp=CAU',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRgajyU-Ba0kZKKf3Q1A-B1fJolUuY_aftTEg&usqp=CAU',
           price: 70,
           recipe: 'gin, fresh thyme, lemon juice, sugar',
           type: 'drink',

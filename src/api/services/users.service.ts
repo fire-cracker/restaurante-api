@@ -19,8 +19,12 @@ export const getUsers = async (): Promise<UserInstance[]> => {
  * @param {String} password - customer password
  * @returns {Object} object
  */
-export const createUser = (username: string, email: string, password: string, role?: 'customer'): Promise<UserInstance> =>
-  db.User.create({ username, email, password, role })
+export const createUser = (
+  username: string,
+  email: string,
+  password: string,
+  role?: 'customer'
+): Promise<UserInstance> => db.User.create({ username, email, password, role })
 
 /**
  * @export
@@ -28,4 +32,5 @@ export const createUser = (username: string, email: string, password: string, ro
  * @param {Object} data - data object
  * @returns {Object} object
  */
-export const fetchUser = (data: { email?: string; id?: string }): Promise<UserInstance> => db.User.findOne({ where: { ...data } })
+export const fetchUser = (data: { email?: string; id?: string }): Promise<UserInstance> =>
+  db.User.findOne({ where: { ...data } })

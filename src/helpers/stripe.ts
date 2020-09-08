@@ -4,7 +4,7 @@ const stripe = new Stripe(process.env.STRIPE_KEY || 'helloooo', {
   apiVersion: '2020-08-27'
 })
 
-export const stripeCharge = async (
+export const createStripeCharge = async (
   amount: number,
   currency: string,
   stripeToken: string,
@@ -24,4 +24,4 @@ export const stripeCharge = async (
   }
 }
 
-export default stripeCharge
+export default createStripeCharge

@@ -1,9 +1,14 @@
 import { Response, Request } from 'express'
 
-import { addReservation, fetchAllReservations, fetchReservation } from '../services/reservations.service'
+import {
+  addReservation,
+  fetchAllReservations,
+  fetchReservation
+} from '../services/reservations.service'
 import { UserInterface } from '../../types/user'
 import { INewReservation } from '../../types/reservations'
 import { ReservationInstance } from '../../database/models/reservations'
+import createStripeCharge from '../../helpers/stripe'
 
 /**
  * @export
@@ -15,15 +20,35 @@ import { ReservationInstance } from '../../database/models/reservations'
 export const createReservation = async (req: Request, res: Response): Promise<Response<any>> => {
   try {
     const {
-      body: { date, time, type, persons },
-      user: { id }
+      body: { date, time, type, stripeToken, persons },
+      user: { id, email }
     } = (req as unknown) as { body: INewReservation; user: UserInterface }
-    const reservation = (await addReservation(id, date, time, type, persons * 1000, persons)) as ReservationInstance
+    const price = persons * 1000
+    const stripeCharge = await createStripeCharge(price, 'usd', stripeToken, email)
+
+    if (stripeCharge.statusCode === 400) {
+      return res.status(400).send({
+        status: 'fail',
+        data: {
+          message: 'Charge Unsuccessful'
+        }
+      })
+    }
+
+    ;(await addReservation(
+      id,
+      date,
+      time,
+      type,
+      price,
+      persons,
+      stripeCharge.id
+    )) as ReservationInstance
 
     return res.status(200).send({
       status: 'success',
       data: {
-        reservation
+        stripeCharge
       }
     })
   } catch (error) {

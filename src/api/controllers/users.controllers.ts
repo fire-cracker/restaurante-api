@@ -27,7 +27,9 @@ export const getUserReservations = async (req: Request, res: Response): Promise<
         }
       })
     }
-    const data = date ? { userId: role === 'admin' ? userId : id, date } : { userId: role === 'admin' ? userId : id }
+    const data = date
+      ? { userId: role === 'admin' ? userId : id, date }
+      : { userId: role === 'admin' ? userId : id }
     const reservation = await fetchUserReservation(data)
 
     if (!reservation.length) {

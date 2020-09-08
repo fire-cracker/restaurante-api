@@ -2,13 +2,21 @@ import { Router } from 'express'
 import passport from 'passport'
 
 import { authInterceptor } from '../../middlewares/validation/validationHandler'
-import { createReservationValidator, reservationChargeValidator } from '../../middlewares/validation/reservations.validation'
-import { createReservation, getAllReservations, getReservation } from '../../controllers/reservations.controllers'
-import { createReservationCharge } from '../../controllers/charges.controllers'
+import { createReservationValidator } from '../../middlewares/validation/reservation.validation'
+import {
+  createReservation,
+  getAllReservations,
+  getReservation
+} from '../../controllers/reservations.controllers'
 
 const reservationsRouter = Router()
 
-reservationsRouter.get('/', passport.authenticate('jwt', { session: false }), authInterceptor, getAllReservations)
+reservationsRouter.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  authInterceptor,
+  getAllReservations
+)
 reservationsRouter.post(
   '/',
   passport.authenticate('jwt', { session: false }),
@@ -16,13 +24,11 @@ reservationsRouter.post(
   createReservationValidator,
   createReservation
 )
-reservationsRouter.get('/:id', passport.authenticate('jwt', { session: false }), authInterceptor, getReservation)
-reservationsRouter.post(
-  '/:id/charges',
+reservationsRouter.get(
+  '/:id',
   passport.authenticate('jwt', { session: false }),
   authInterceptor,
-  reservationChargeValidator,
-  createReservationCharge
+  getReservation
 )
 
 export default reservationsRouter

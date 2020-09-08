@@ -2,8 +2,9 @@ import { Router } from 'express'
 import passport from 'passport'
 
 import { authInterceptor } from '../../middlewares/validation/validationHandler'
-import { createReservationValidator } from '../../middlewares/validation/reservation.validation'
+import { createReservationValidator, reservationChargeValidator } from '../../middlewares/validation/reservations.validation'
 import { createReservation, getAllReservations, getReservation } from '../../controllers/reservations.controllers'
+import { createReservationCharge } from '../../controllers/charges.controllers'
 
 const reservationsRouter = Router()
 
@@ -16,5 +17,12 @@ reservationsRouter.post(
   createReservation
 )
 reservationsRouter.get('/:id', passport.authenticate('jwt', { session: false }), authInterceptor, getReservation)
+reservationsRouter.post(
+  '/:id/charges',
+  passport.authenticate('jwt', { session: false }),
+  authInterceptor,
+  reservationChargeValidator,
+  createReservationCharge
+)
 
 export default reservationsRouter

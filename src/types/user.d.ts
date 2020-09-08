@@ -16,22 +16,6 @@ export interface NewUserInterface {
   password: string
 }
 
-export interface NewReservationInterface {
-  date: Date
-  time: string
-  type: string
-  stripeToken: string
-  persons: number
-}
-
-export interface IReservation extends TimeStampInterface {
-  id: number
-  date: Date
-  orders: any
-  price: number
-  persons: number
-}
-
 export interface IdInterface {
   id: number
 }

@@ -10,7 +10,7 @@ export interface ReservationAttributes {
   type: string
   price: number
   persons: number
-  stripeId?: string
+  stripeId: string
   createdAt?: Date
   updatedAt?: Date
 }
@@ -43,7 +43,7 @@ export const ReservationModel = (
       type: DataTypes.INTEGER
     },
     stripeId: {
-      allowNull: true,
+      allowNull: false,
       type: DataTypes.STRING
     },
     persons: {

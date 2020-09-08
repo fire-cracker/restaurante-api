@@ -15,10 +15,8 @@ passport.use(
       const user = (await fetchUser({ id: payload.id })) as UserInstance
       if (!user) {
         return done(null, {
-          error: {
-            status: 'fail',
-            data: { message: 'Access Unauthorized' }
-          }
+          status: 'fail',
+          data: { message: 'Access Unauthorized' }
         })
       }
 

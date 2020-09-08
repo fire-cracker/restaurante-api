@@ -39,7 +39,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       stripeId: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

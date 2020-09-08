@@ -1,5 +1,9 @@
+import Sequelize from 'sequelize'
+
 import db from '../../database/models'
 import { UserInstance } from '../../database/models/users'
+
+const { Op } = Sequelize
 
 /**
  * @export

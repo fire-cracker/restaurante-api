@@ -1,7 +1,8 @@
 import { Response, Request } from 'express'
 
 import { addReservation, fetchAllReservations, fetchReservation } from '../services/reservations.service'
-import { UserInterface, NewReservationInterface } from '../../types/user'
+import { UserInterface } from '../../types/user'
+import { INewReservation } from '../../types/reservations'
 import { ReservationInstance } from '../../database/models/reservations'
 import { stripeCharge } from '../../helpers/stripe'
 
@@ -17,7 +18,7 @@ export const createReservation = async (req: Request, res: Response): Promise<Re
     const {
       body: { date, time, type, stripeToken, persons },
       user: { id, email }
-    } = (req as unknown) as { body: NewReservationInterface; user: UserInterface }
+    } = (req as unknown) as { body: INewReservation; user: UserInterface }
 
     const stripeCharges = await stripeCharge(persons * 1000, 'usd', stripeToken, email)
 
@@ -31,7 +32,7 @@ export const createReservation = async (req: Request, res: Response): Promise<Re
       })
     }
 
-    const newReservation = (await addReservation(
+    const reservation = (await addReservation(
       id,
       date,
       time,
@@ -44,7 +45,7 @@ export const createReservation = async (req: Request, res: Response): Promise<Re
     return res.status(200).send({
       status: 'success',
       data: {
-        reservation: newReservation
+        reservation
       }
     })
   } catch (error) {

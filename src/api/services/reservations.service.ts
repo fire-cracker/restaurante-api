@@ -10,7 +10,6 @@ import { ReservationInstance } from '../../database/models/reservations'
  * @param {Integer} price - reservation price
  * @param {Integer} persons - number of people
  * @param {String} type - type of menu
- * @param {String} stripeId - stripeId
  * @returns {Object} object
  */
 export const addReservation = (
@@ -19,11 +18,10 @@ export const addReservation = (
   time: string,
   type: string,
   price: number,
-  persons: number,
-  stripeId: string
+  persons: number
 ): Promise<ReservationInstance> => {
   const newDate: any = new Date(date)
-  const reservation = db.Reservation.create({ userId, date: newDate, time, type, price, persons, stripeId })
+  const reservation = db.Reservation.create({ userId, date: newDate, time, type, price, persons })
   return reservation
 }
 

@@ -32,7 +32,10 @@ export const getAllMenus = async (req: Request, res: Response): Promise<Response
  * @param {Object} res - response object
  * @returns {Object} JSON object (JSend format)
  */
-export const getMenu = async ({ params: { id } }: Request, res: Response): Promise<Response<any>> => {
+export const getMenu = async (
+  { params: { id } }: Request,
+  res: Response
+): Promise<Response<any>> => {
   try {
     const menu = await fetchMenu(Number(id))
 

@@ -5,7 +5,8 @@ const welcomeRouter = Router()
 welcomeRouter.get('/', (req: Request, res: Response) =>
   res.status(200).json({
     success: true,
-    message: 'Welcome to my simple restaurant-api. Read the READMe for a better understanding of how to implement the project'
+    message:
+      'Welcome to my simple restaurant-api. Read the READMe for a better understanding of how to implement the project'
   })
 )
 

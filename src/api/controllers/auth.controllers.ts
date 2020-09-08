@@ -3,7 +3,6 @@ import { Response, Request } from 'express'
 import { createUser, fetchUser } from '../services/users.service'
 import { UserInstance } from '../../database/models/users'
 import { signToken } from '../../helpers/utils'
-import { UserInterface } from '../../types/user'
 
 /**
  * @export

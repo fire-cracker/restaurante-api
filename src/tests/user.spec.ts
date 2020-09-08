@@ -18,7 +18,11 @@ import {
 chai.use(chaiHttp)
 
 describe('Tests for users', () => {
-  let adminToken: string, customerToken: string, customerToken2: string, customerId: string, customerId2: string
+  let adminToken: string,
+    customerToken: string,
+    customerToken2: string,
+    customerId: string,
+    customerId2: string
   before(async () => {
     const {
       body: {
@@ -140,7 +144,10 @@ describe('Tests for users', () => {
 
   describe('Tests for get users reservations', () => {
     it('should get users reservations if request made by reservtion owner and is correct', async () => {
-      const res = await chai.request(app).get(`/users/${customerId}/reservations`).set('Authorization', `${customerToken}`)
+      const res = await chai
+        .request(app)
+        .get(`/users/${customerId}/reservations`)
+        .set('Authorization', `${customerToken}`)
       expect(res).to.have.status(200)
       expect(res.body)
         .to.be.an.instanceof(Object)
@@ -149,11 +156,23 @@ describe('Tests for users', () => {
         .and.to.have.property('reservation')
         .and.to.be.an.instanceof(Array)
         .and.to.have.property('0')
-        .that.includes.all.keys('id', 'date', 'time', 'price', 'userId', 'type', 'persons', 'stripeId')
+        .that.includes.all.keys(
+          'id',
+          'date',
+          'time',
+          'price',
+          'userId',
+          'type',
+          'persons',
+          'stripeId'
+        )
     })
 
     it('should get users reservations if request made by admin and is correct', async () => {
-      const res = await chai.request(app).get(`/users/${customerId}/reservations`).set('Authorization', `${adminToken}`)
+      const res = await chai
+        .request(app)
+        .get(`/users/${customerId}/reservations`)
+        .set('Authorization', `${adminToken}`)
       expect(res).to.have.status(200)
       expect(res.body)
         .to.be.an.instanceof(Object)
@@ -162,11 +181,23 @@ describe('Tests for users', () => {
         .and.to.have.property('reservation')
         .and.to.be.an.instanceof(Array)
         .and.to.have.property('0')
-        .that.includes.all.keys('id', 'date', 'time', 'price', 'userId', 'type', 'persons', 'stripeId')
+        .that.includes.all.keys(
+          'id',
+          'date',
+          'time',
+          'price',
+          'userId',
+          'type',
+          'persons',
+          'stripeId'
+        )
     })
 
     it('should error if request is made by another user who is not an admin', async () => {
-      const res = await chai.request(app).get(`/users/${customerId}/reservations`).set('Authorization', `${customerToken2}`)
+      const res = await chai
+        .request(app)
+        .get(`/users/${customerId}/reservations`)
+        .set('Authorization', `${customerToken2}`)
       expect(res).to.have.status(401)
       expect(res.body)
         .to.be.an.instanceof(Object)
@@ -177,7 +208,10 @@ describe('Tests for users', () => {
     })
 
     it('should error if user reservation does not exist', async () => {
-      const res = await chai.request(app).get(`/users/${customerId2}/reservations`).set('Authorization', `${adminToken}`)
+      const res = await chai
+        .request(app)
+        .get(`/users/${customerId2}/reservations`)
+        .set('Authorization', `${adminToken}`)
       expect(res).to.have.status(404)
       expect(res.body)
         .to.be.an.instanceof(Object)
@@ -190,7 +224,10 @@ describe('Tests for users', () => {
 
   describe('Tests for get user', () => {
     it('should get user details if request made by owner and is correct', async () => {
-      const res = await chai.request(app).get(`/users/${customerId}`).set('Authorization', `${customerToken}`)
+      const res = await chai
+        .request(app)
+        .get(`/users/${customerId}`)
+        .set('Authorization', `${customerToken}`)
       expect(res).to.have.status(200)
       expect(res.body)
         .to.be.an.instanceof(Object)
@@ -202,7 +239,10 @@ describe('Tests for users', () => {
     })
 
     it('should get users reservations if request made by admin and is correct', async () => {
-      const res = await chai.request(app).get(`/users/${customerId}`).set('Authorization', `${adminToken}`)
+      const res = await chai
+        .request(app)
+        .get(`/users/${customerId}`)
+        .set('Authorization', `${adminToken}`)
       expect(res).to.have.status(200)
       expect(res.body)
         .to.be.an.instanceof(Object)
@@ -214,7 +254,10 @@ describe('Tests for users', () => {
     })
 
     it('should error if request is made by another user who is not an admin', async () => {
-      const res = await chai.request(app).get(`/users/${customerId}`).set('Authorization', `${customerToken2}`)
+      const res = await chai
+        .request(app)
+        .get(`/users/${customerId}`)
+        .set('Authorization', `${customerToken2}`)
       expect(res).to.have.status(401)
       expect(res.body)
         .to.be.an.instanceof(Object)
@@ -225,7 +268,10 @@ describe('Tests for users', () => {
     })
 
     it('should error if user does not exist', async () => {
-      const res = await chai.request(app).get('/users/77abf754-3be2-40fc-a3a9-595f3aab50d7').set('Authorization', `${adminToken}`)
+      const res = await chai
+        .request(app)
+        .get('/users/77abf754-3be2-40fc-a3a9-595f3aab50d7')
+        .set('Authorization', `${adminToken}`)
       expect(res).to.have.status(404)
       expect(res.body)
         .to.be.an.instanceof(Object)

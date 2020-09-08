@@ -47,7 +47,10 @@ export const UserModel = (
     }
   }
 
-  const User = sequelize.define<UserInstance, UserAttributes>('user', attributes) as UserModelInstanceMethods
+  const User = sequelize.define<UserInstance, UserAttributes>(
+    'user',
+    attributes
+  ) as UserModelInstanceMethods
 
   User.beforeCreate(async user => {
     const salt = await bcrypt.genSaltSync()

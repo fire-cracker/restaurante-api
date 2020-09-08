@@ -15,7 +15,9 @@ export interface ReservationAttributes {
   updatedAt?: Date
 }
 
-export interface ReservationInstance extends Sequelize.Instance<ReservationAttributes>, ReservationAttributes {}
+export interface ReservationInstance
+  extends Sequelize.Instance<ReservationAttributes>,
+    ReservationAttributes {}
 
 export const ReservationModel = (
   sequelize: Sequelize.Sequelize,
@@ -52,11 +54,15 @@ export const ReservationModel = (
     }
   }
 
-  const Reservation = sequelize.define<ReservationInstance, ReservationAttributes>('reservation', attributes, {
-    defaultScope: {
-      attributes: { exclude: ['updatedAt'] }
+  const Reservation = sequelize.define<ReservationInstance, ReservationAttributes>(
+    'reservation',
+    attributes,
+    {
+      defaultScope: {
+        attributes: { exclude: ['updatedAt'] }
+      }
     }
-  })
+  )
 
   Reservation.associate = models => {
     Reservation.belongsTo(models.User, { foreignKey: 'userId', as: 'reservee' })

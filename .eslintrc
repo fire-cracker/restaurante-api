@@ -23,7 +23,7 @@
       {
         "semi": false,
         "trailingComma": "none",
-        "printWidth": 130,
+        "printWidth": 100,
         "tabWidth": 2,
         "arrowParens": "avoid",
         "singleQuote": true

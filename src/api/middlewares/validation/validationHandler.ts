@@ -10,7 +10,12 @@ import Joi, { ObjectSchema } from '@hapi/joi'
  * @param {Object} next - next object
  * @returns {Object} next object
  */
-export const validationHandler = async (req: Request, res: Response, next: NextFunction, schema: ObjectSchema) => {
+export const validationHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+  schema: ObjectSchema
+) => {
   try {
     await Joi.validate(req.body, schema)
     next()

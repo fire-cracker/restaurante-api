@@ -6,7 +6,11 @@ const persons = Joi.number().integer().min(1).max(6).required()
 const time = Joi.string()
   .regex(/^([01]\d|2[0-3]):?([0-5]\d)$/)
   .required()
-const type = Joi.string().trim().valid(['breakfast', 'lunch', 'dinner', 'drinks']).required()
+const type = Joi.string()
+  .trim()
+  .valid(['breakfast', 'lunch', 'dinner', 'drinks'])
+  .insensitive()
+  .required()
 
 export const createReservationSchema = Joi.object().keys({
   date,
